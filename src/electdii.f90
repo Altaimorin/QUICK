@@ -401,8 +401,10 @@ subroutine electdiis(jscf,PRMS)
 
         ! Now diagonalize the operator matrix.
         call cpu_time(timer_begin%TDiag)
-        call DIAG(nbasis,quick_qm_struct%o,nbasis,quick_method%DMCutoff,V2,quick_qm_struct%E,& 
-            quick_qm_struct%idegen,quick_qm_struct%vec,IERROR)
+        !call DIAG(nbasis,quick_qm_struct%o,nbasis,quick_method%DMCutoff,V2,quick_qm_struct%E,& 
+        !    quick_qm_struct%idegen,quick_qm_struct%vec,IERROR)
+        call DIAG(nbasis,1+6*nbasis+2*nbasis**2,quick_qm_struct%o,quick_qm_struct%E,quick_qm_struct%vec,IERROR)
+
         call cpu_time(timer_end%TDiag)
 
         ! Calculate C = XC' and form a new density matrix.
@@ -767,7 +769,8 @@ end subroutine electdiis
             !--------------------------------------------
             call cpu_time(timer_begin%TDiag) ! Trigger the dc timer for subsytem
 
-            call DIAG(NtempN,Odcsubtemp,NtempN,quick_method%DMCutoff,Vtemp,EVAL1temp,IDEGEN1temp,VECtemp,IERROR)
+            !call DIAG(NtempN,Odcsubtemp,NtempN,quick_method%DMCutoff,Vtemp,EVAL1temp,IDEGEN1temp,VECtemp,IERROR)
+            call DIAG(NtempN,1+6*NtempN+2*NtempN**2,Odcsubtemp,EVAL1temp,VECtemp,IERROR)
 
             call cpu_time(timer_end%TDiag)  ! Stop the timer
 

@@ -55,7 +55,8 @@ subroutine fullx
 
    ! Now diagonalize HOLD to generate the eigenvectors and eigenvalues.
 
-   call DIAG(NBASIS,quick_scratch%hold,NBASIS,quick_method%DMCutoff,V,Sminhalf,IDEGEN1,quick_scratch%hold2,IERROR)
+   !call DIAG(NBASIS,quick_scratch%hold,NBASIS,quick_method%DMCutoff,V,Sminhalf,IDEGEN1,quick_scratch%hold2,IERROR)
+   call DIAG(NBASIS,1+6*NBASIS+2*NBASIS**2,quick_scratch%hold,Sminhalf,quick_scratch%hold2,IERROR)
    ! Consider the following:
 
    ! X = U * s^(-.5) * transpose(U)

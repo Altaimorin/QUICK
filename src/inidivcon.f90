@@ -929,7 +929,8 @@ subroutine divideX
 
      !    call DIAG(NBASIS,HOLD,NBASIS,TOL,V,Sminhalf,IDEGEN1,Uxiao,IERROR)
 
-     call DIAG(NBASIS,Odcsubtemp,NBASIS,1d-10,Vtemp,EVAL1temp,IDEGEN1temp,VECtemp,IERROR)
+     !call DIAG(NBASIS,Odcsubtemp,NBASIS,1d-10,Vtemp,EVAL1temp,IDEGEN1temp,VECtemp,IERROR)
+     call DIAG(NBASIS,1+6*NBASIS+2*NBASIS**2,Odcsubtemp,EVAL1temp,VECtemp,IERROR)
 
      ! Consider the following:
 

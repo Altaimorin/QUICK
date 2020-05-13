@@ -134,10 +134,10 @@
     ! There is a problem if HOLD is used for evec1.
        
        
-        CALL DIAG(nbasis,quick_qm_struct%o,nbasis,quick_method%DMCutoff,V2,quick_qm_struct%E, &
-            quick_qm_struct%idegen,quick_qm_struct%vec, &
-        IERROR)
-        
+        !CALL DIAG(nbasis,quick_qm_struct%o,nbasis,quick_method%DMCutoff,V2,quick_qm_struct%E, &
+        !    quick_qm_struct%idegen,quick_qm_struct%vec, &
+        !IERROR)
+    CALL DIAG(nbasis,1+6*nbasis+2*nbasis**2, quick_qm_struct%o,quick_qm_struct%E, quick_qm_struct%vec, IERROR)
 
     ! 4)  Calculate C = XC'
     ! Note here too that we are actuall calculating C = Transpose[X] C',
@@ -229,9 +229,9 @@
     ! In this case VEC is now C'.
     ! There is a problem if HOLD is used for evec1.
 
-        CALL DIAG(nbasis,quick_qm_struct%o,nbasis,quick_method%DMCutoff,V2,&
-        quick_qm_struct%EB,quick_qm_struct%idegen,quick_qm_struct%vec,IERROR)
-
+        !CALL DIAG(nbasis,quick_qm_struct%o,nbasis,quick_method%DMCutoff,V2,&
+        !quick_qm_struct%EB,quick_qm_struct%idegen,quick_qm_struct%vec,IERROR)
+        CALL DIAG(nbasis,1+6*nbasis+2*nbasis**2,quick_qm_struct%o,quick_qm_struct%EB,quick_qm_struct%vec,IERROR)
     
     ! 4)  Calculate C = XC'
     ! Note here too that we are actuall calculating C = Transpose[X] C',

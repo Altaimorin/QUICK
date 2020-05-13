@@ -408,10 +408,10 @@ subroutine uelectdiis(jscf,PRMS)
 
       ! Now diagonalize the operator matrix.
 
-      CALL DIAG(nbasis,quick_qm_struct%o,nbasis,quick_method%DMCutoff,V2,quick_qm_struct%E, &
-            quick_qm_struct%idegen,quick_qm_struct%vec, &
-            IERROR)
-
+      !CALL DIAG(nbasis,quick_qm_struct%o,nbasis,quick_method%DMCutoff,V2,quick_qm_struct%E, &
+      !      quick_qm_struct%idegen,quick_qm_struct%vec, &
+      !      IERROR)
+      CALL DIAG(nbasis,1+6*nbasis+2*nbasis**2,quick_qm_struct%o,quick_qm_struct%E,quick_qm_struct%vec,IERROR)
 
 
       ! Calculate C = XC' and form a new density matrix.
@@ -503,9 +503,9 @@ subroutine uelectdiis(jscf,PRMS)
 
       ! Now diagonalize the operator matrix.
 
-      CALL DIAG(nbasis,quick_qm_struct%o,nbasis,quick_method%DMCutoff,V2, &
-        quick_qm_struct%EB,quick_qm_struct%idegen,quick_qm_struct%vec, IERROR)
-
+      !CALL DIAG(nbasis,quick_qm_struct%o,nbasis,quick_method%DMCutoff,V2, &
+      !  quick_qm_struct%EB,quick_qm_struct%idegen,quick_qm_struct%vec, IERROR)
+      CALL DIAG(nbasis,1+6*nbasis+2*nbasis**2,quick_qm_struct%o,quick_qm_struct%EB,quick_qm_struct%vec,IERROR)
 
 
       ! Calculate C = XC' and form a new density matrix.
