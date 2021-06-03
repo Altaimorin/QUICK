@@ -187,7 +187,7 @@ static const int SM_2X_THREADS_PER_BLOCK    =   256;
 
 // constant for 2e-integral
 static const int SM_13_2E_THREADS_PER_BLOCK =   256;
-static const int SM_2X_2E_THREADS_PER_BLOCK =   256;
+static const int SM_2X_2E_THREADS_PER_BLOCK =   64;
 
 // constant for DFT Exchange-Correlation part
 static const int MAX_GRID                   =   194;

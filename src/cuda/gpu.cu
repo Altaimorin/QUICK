@@ -164,7 +164,7 @@ extern "C" void gpu_init_(int* ierr)
     fprintf(gpu->debugFile,"New Stack size limit:    %zu\n", val);
 #endif
     
-	gpu->blocks = deviceProp.multiProcessorCount;
+	gpu->blocks = deviceProp.multiProcessorCount * 4;
     if (deviceProp.major ==1) {
         switch (deviceProp.minor) {
             case 0:

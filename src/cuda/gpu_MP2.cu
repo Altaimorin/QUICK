@@ -47,7 +47,8 @@ void upload_sim_to_constant_MP2(_gpu_type gpu){
 //this kernel is to parallelize the two inner loops of the first transformation in firstThreeQuartersTransHost
 
 __global__ void 
-__launch_bounds__(SM_2X_2E_THREADS_PER_BLOCK, 1) firstQuarterTransKernel(int II,int JJ,int nstepmp2s, int nsteplength, int nstep, int nbasistemp, unsigned long long int* ntempptr_d,\
+//__launch_bounds__(SM_2X_2E_THREADS_PER_BLOCK, 1) 
+firstQuarterTransKernel(int II,int JJ,int nstepmp2s, int nsteplength, int nstep, int nbasistemp, unsigned long long int* ntempptr_d,\
 QUICKDouble cutoffmp2, QUICKDouble* orbmp2i331)
 {
 	int offside = blockIdx.x*blockDim.x+threadIdx.x;
@@ -142,7 +143,8 @@ QUICKDouble cutoffmp2, QUICKDouble* orbmp2i331)
 
 //this kernel is to parallelize the second transformation
 __global__ void
-__launch_bounds__(SM_2X_2E_THREADS_PER_BLOCK, 1) secondQuarterTransKernel\
+//__launch_bounds__(SM_2X_2E_THREADS_PER_BLOCK, 1) 
+secondQuarterTransKernel\
 (int III, int JJJ, int IIInew,int JJJnew, int nsteplength, int nstep, int nbasistemp, \
 QUICKDouble* orbmp2i331, QUICKDouble* orbmp2j331)
 {
@@ -184,7 +186,8 @@ QUICKDouble* orbmp2i331, QUICKDouble* orbmp2j331)
 
 //this kernel is to parallelize the third transformation
 __global__ void
-__launch_bounds__(SM_2X_2E_THREADS_PER_BLOCK, 1) thirdQuarterTransKernel(int III, int JJJ, int IIInew,int JJJnew, int nsteplength, int nstep, int nbasistemp, QUICKDouble* orbmp2j331, QUICKDouble* orbmp2k331)
+//__launch_bounds__(SM_2X_2E_THREADS_PER_BLOCK, 1) 
+thirdQuarterTransKernel(int III, int JJJ, int IIInew,int JJJnew, int nsteplength, int nstep, int nbasistemp, QUICKDouble* orbmp2j331, QUICKDouble* orbmp2k331)
 {
 	int offside = blockIdx.x*blockDim.x+threadIdx.x;
 	int totalThreads = blockDim.x*gridDim.x;
@@ -264,7 +267,8 @@ __launch_bounds__(SM_2X_2E_THREADS_PER_BLOCK, 1) thirdQuarterTransKernel(int III
 }
 
 __global__ void
-__launch_bounds__(SM_2X_2E_THREADS_PER_BLOCK, 1) forthQuarterTransKernelV2(int icycle, int i3, int k3, int nstep, QUICKDouble* orbmp2k331, QUICKDouble* orbmp2)
+//__launch_bounds__(SM_2X_2E_THREADS_PER_BLOCK, 1) 
+forthQuarterTransKernelV2(int icycle, int i3, int k3, int nstep, QUICKDouble* orbmp2k331, QUICKDouble* orbmp2)
 {   
     QUICKDouble* coefficient = devSim_MP2.coefficient;
     int nElec = devSim_MP2.nElec;
@@ -371,6 +375,10 @@ void fourQuarterTransHost(_gpu_type gpu, QUICKDouble* ememorysumptr, int* nstepm
 	cudaMalloc((void **)&ntempptr_d,sizeof(unsigned long long int));
 	cudaMemset(ntempptr_d, 0, sizeof(unsigned long long int));
 
+	printf("Before start CUDA MP2,");
+	printf("gpu->blocks is %d, gpu->twoEThreadsPerBlock is %d\n", gpu->blocks, gpu->twoEThreadsPerBlock);
+
+
 	for(int i3new=1;i3new<=nstepmp2;i3new++)
 	{
 		int nstepmp2s = (i3new-1)*nstep+1+nfrozencore;
@@ -469,7 +477,8 @@ void fourQuarterTransHost(_gpu_type gpu, QUICKDouble* ememorysumptr, int* nstepm
 
 
 __global__ void
-__launch_bounds__(SM_2X_2E_THREADS_PER_BLOCK, 1) forthQuarterTransKernel(int icycle, int i3, int k3, int nstep, QUICKDouble* orbmp2k331, QUICKDouble* orbmp2)
+//__launch_bounds__(SM_2X_2E_THREADS_PER_BLOCK, 1) 
+forthQuarterTransKernel(int icycle, int i3, int k3, int nstep, QUICKDouble* orbmp2k331, QUICKDouble* orbmp2)
 {
 	QUICKDouble* coefficient = devSim_MP2.coefficient;
 	int nElec = devSim_MP2.nElec;
@@ -505,7 +514,8 @@ __launch_bounds__(SM_2X_2E_THREADS_PER_BLOCK, 1) forthQuarterTransKernel(int icy
 }
 
 __global__ void 
-__launch_bounds__(SM_2X_2E_THREADS_PER_BLOCK, 1) finalMP2AccumulationKernel(int i3, int k3, QUICKDouble* orbmp2, QUICKDouble* MP2cor)
+//__launch_bounds__(SM_2X_2E_THREADS_PER_BLOCK, 1) 
+finalMP2AccumulationKernel(int i3, int k3, QUICKDouble* orbmp2, QUICKDouble* MP2cor)
 {
     QUICKDouble* molorbe = devSim_MP2.molorbe;
     int nElec = devSim_MP2.nElec;
